@@ -7,6 +7,9 @@
 
 #### Distribution of Work
 **Step 1: Please, provide here a brief description (one short paragraph) of the distribution of work across your team. You can refine this description as you carry out the project iteration.**
+Milestone 1: One person (1 & 2), Another (3 & 4), Last (5 & 7).
+Milestone 2: One (6), 2nd & 3rd (7).
+Milestone 3: One person (1 & 2), Another (3 & 4), Last (5 & 7).
 
 ### Project Responsibilities of the Individual
 * Individually, contribute to the success of the team according to the policies and schedule agreed upon by all team members. Individually, create the opportunity for everyone in your group to succeed at being a good team member - don't do all the work yourself.
@@ -23,6 +26,7 @@ Establish your own additional team policies around the following aspects:
 
 #### Additional Expectations and Responsabilities
 **Step 2: Please, describe here (using as much text as you need) additional expections and responsabilities for this project iteration**.
+Weekly check-ins, meetings online. Communicate whenever someone finishes a task. Communicate whenever someone can't finish their tasks and needs help.
 
 ## Team Member Names
 **Step 3: Please enter your name. Each one of the team members should add the name through a different commit. For example, student A adds their name and commits, then student B adds their name and commits.**
