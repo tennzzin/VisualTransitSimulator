@@ -31,3 +31,4 @@ Weekly check-ins, meetings online. Communicate whenever someone finishes a task.
 ## Team Member Names
 **Step 3: Please enter your name. Each one of the team members should add the name through a different commit. For example, student A adds their name and commits, then student B adds their name and commits.**
 Cindy Su
+Tenzin Chonyi
