@@ -1,8 +1,15 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Implements GenerationStrategy interface and defines
+ * vehicle generation logic for the "night" period (After 6PM).
+ */
 public class BusStrategyNight implements GenerationStrategy {
   private int counter;
 
+  /**
+   * Constructor for BusStrategyNight.
+   */
   public BusStrategyNight() {
     this.counter = 0;
   }
@@ -27,6 +34,11 @@ public class BusStrategyNight implements GenerationStrategy {
     return typeOfVehicle;
   }
 
+  /**
+   * Gets the current value of the counter.
+   *
+   * @return the current value of the counter
+   */
   public int getCounter() {
     return counter;
   }

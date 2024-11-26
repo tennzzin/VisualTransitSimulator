@@ -1,8 +1,15 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Implements GenerationStrategy interface and defines
+ * vehicle generation logic for the "day" period (8AM to 6PM).
+ */
 public class BusStrategyDay implements GenerationStrategy {
   private int counter;
 
+  /**
+   * Constructor for BusStrategyDay.
+   */
   public BusStrategyDay() {
     this.counter = 0;
   }
@@ -28,6 +35,11 @@ public class BusStrategyDay implements GenerationStrategy {
     return typeOfVehicle;
   }
 
+  /**
+   * Gets current value of the counter.
+   *
+   * @return current value of counter
+   */
   public int getCounter() {
     return counter;
   }

@@ -1,5 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Implementation of the VehicleFactory interface.
+ */
 public class BusFactory implements VehicleFactory {
   private GenerationStrategy generationStrategy;
   private Counter counter;

@@ -1,6 +1,13 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Abstract class representing vehicle type Bus.
+ */
 public abstract class Bus extends Vehicle {
+
+  /**
+   * Constant for identifying bus vehicles.
+   */
   public static final String BUS_VEHICLE = "BUS_VEHICLE";
 
   /**

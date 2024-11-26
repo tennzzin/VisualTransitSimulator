@@ -16,6 +16,10 @@ import java.util.Scanner;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
+/**
+ *  Reads and parses configuration file with information about lines, routes,
+ *  stops, and other transportation system details.
+ */
 public class ConfigManager {
   private static final String LINE_START = "LINE_START";
   private static final String LINE_END = "LINE_END";
@@ -34,6 +38,9 @@ public class ConfigManager {
   private List<Route> routes = new ArrayList<Route>();
   private StorageFacility storageFacility;
 
+  /**
+   * Constructor for ConfigManager.
+   */
   public ConfigManager() {
     storageFacility = null;
   }
@@ -136,10 +143,20 @@ public class ConfigManager {
     }
   }
 
+  /**
+   * Gets the list of lines that have been defined in the configuration file.
+   *
+   * @return the list of 'Line' objects
+   */
   public List<Line> getLines() {
     return lines;
   }
 
+  /**
+   * Gets the storage facility that was configured from the configuration file.
+   *
+   * @return the `StorageFacility` object
+   */
   public StorageFacility getStorageFacility() {
     return storageFacility;
   }
