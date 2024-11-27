@@ -2,9 +2,24 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.io.PrintStream;
 
+/**
+ * Represents a Large Bus vehicle, inheriting from the Bus class.
+ */
 public class LargeBus extends Bus {
+
+  /**
+   * Constant representing the type of vehicle.
+   */
   public static final String LARGE_BUS_VEHICLE = "LARGE_BUS_VEHICLE";
+
+  /**
+   * Constant representing the speed of bus.
+   */
   public static final double SPEED = 0.5;
+
+  /**
+   * Constant representing the capacity of bus.
+   */
   public static final int CAPACITY = 80;
 
   /**

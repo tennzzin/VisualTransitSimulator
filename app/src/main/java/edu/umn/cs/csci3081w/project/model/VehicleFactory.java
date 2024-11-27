@@ -1,5 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Interface that defines methods for creating and returning vehicles.
+ */
 public interface VehicleFactory {
 
   /**

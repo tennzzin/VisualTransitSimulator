@@ -1,6 +1,13 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Represents a train in the visual transit simulator.
+ */
 public abstract class Train extends Vehicle {
+
+  /**
+   * Constant representing the type of vehicle.
+   */
   public static final String TRAIN_VEHICLE = "TRAIN_VEHICLE";
 
   /**

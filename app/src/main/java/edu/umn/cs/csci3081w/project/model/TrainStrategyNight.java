@@ -1,8 +1,14 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Strategy for deploying trains during the night.
+ */
 public class TrainStrategyNight implements GenerationStrategy {
   private int counter;
 
+  /**
+   * Constructor for TrainStrategyNight.
+   */
   public TrainStrategyNight() {
     this.counter = 0;
   }
@@ -28,6 +34,11 @@ public class TrainStrategyNight implements GenerationStrategy {
     return typeOfVehicle;
   }
 
+  /**
+   * Gets the current counter value.
+   *
+   * @return the current counter value
+   */
   public int getCounter() {
     return counter;
   }

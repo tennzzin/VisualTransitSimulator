@@ -4,10 +4,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.Line;
 
+/**
+ * Handles initialization of the lines in the simulation.
+ */
 public class InitLinesCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
 
+  /**
+   * Constructor for InitLinesCommand.
+   *
+   * @param simulator the visual transit simulator that contains the lines data
+   */
   public InitLinesCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

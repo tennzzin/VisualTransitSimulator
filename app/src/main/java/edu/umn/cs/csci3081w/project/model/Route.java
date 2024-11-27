@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Represents public transit route, including stops and passenger generation.
+ */
 public class Route {
   private int id;
   private String name;
@@ -98,6 +101,11 @@ public class Route {
     out.println("####Route Info End####");
   }
 
+  /**
+   * Check is route has reached the end.
+   *
+   * @return true if route is at the end, false otherwise
+   */
   public boolean isAtEnd() {
     return nextStopIndex >= stops.size();
   }
@@ -161,18 +169,38 @@ public class Route {
     return this.generator.generatePassengers();
   }
 
+  /**
+   * Gets ID for this route.
+   *
+   * @return the route ID
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * Gets name for this route.
+   *
+   * @return the name of route
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets list of stops on this route.
+   *
+   * @return the list of stops
+   */
   public List<Stop> getStops() {
     return stops;
   }
 
+  /**
+   * Gets the index of next stop.
+   *
+   * @return the next stop's index
+   */
   public int getNextStopIndex() {
     return nextStopIndex;
   }

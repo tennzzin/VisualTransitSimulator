@@ -13,6 +13,9 @@ import edu.umn.cs.csci3081w.project.model.VehicleFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simulates a visual transit system with vehicles and routes.
+ */
 public class VisualTransitSimulator {
 
   private static boolean LOGGING = false;
@@ -158,10 +161,20 @@ public class VisualTransitSimulator {
     }
   }
 
+  /**
+   * Get list of lines in simulation.
+   *
+   * @return the list of lines
+   */
   public List<Line> getLines() {
     return lines;
   }
 
+  /**
+   * Gets list of active vehicles in simulation.
+   *
+   * @return the list of active vehicles
+   */
   public List<Vehicle> getActiveVehicles() {
     return activeVehicles;
   }

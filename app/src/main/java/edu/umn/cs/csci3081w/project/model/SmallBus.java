@@ -2,9 +2,24 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.io.PrintStream;
 
+/**
+ * Represents a Small Bus vehicle, inheriting from the Bus class.
+ */
 public class SmallBus extends Bus {
+
+  /**
+   * Constant representing the type of vehicle.
+   */
   public static final String SMALL_BUS_VEHICLE = "SMALL_BUS_VEHICLE";
+
+  /**
+   * Constant representing speed of bus.
+   */
   public static final double SPEED = 0.5;
+
+  /**
+   * Constant representing capacity of bus.
+   */
   public static final int CAPACITY = 20;
 
   /**

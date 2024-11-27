@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * Concrete implementation of VehicleSubject interface.
+ */
 public class VehicleConcreteSubject implements VehicleSubject {
   private WebServerSession session;
   private List<VehicleObserver> observers;
@@ -52,10 +55,20 @@ public class VehicleConcreteSubject implements VehicleSubject {
     }
   }
 
+  /**
+   * Gets list of current observers attached to the vehicle subject.
+   *
+   * @return list of observers
+   */
   public List<VehicleObserver> getObservers() {
     return observers;
   }
 
+  /**
+   * Gets web server session associated.
+   *
+   * @return the web server session
+   */
   public WebServerSession getSession() {
     return session;
   }

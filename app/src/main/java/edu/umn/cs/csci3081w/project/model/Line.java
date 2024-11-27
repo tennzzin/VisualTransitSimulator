@@ -3,9 +3,19 @@ package edu.umn.cs.csci3081w.project.model;
 import java.io.PrintStream;
 import java.util.Iterator;
 
+/**
+ * Represents a line in the vehicle transit simulation.
+ */
 public class Line {
 
+  /**
+   * Constant for bus line type.
+   */
   public static final String BUS_LINE = "BUS_LINE";
+
+  /**
+   * Constant for train line type.
+   */
   public static final String TRAIN_LINE = "TRAIN_LINE";
   private int id;
   private String name;
@@ -73,22 +83,47 @@ public class Line {
     }
   }
 
+  /**
+   * Gets the line ID.
+   *
+   * @return the line ID
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * Gets the line name.
+   *
+   * @return the line name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the line type.
+   *
+   * @return the line type
+   */
   public String getType() {
     return type;
   }
 
+  /**
+   * Gets the outbound route associated with this line.
+   *
+   * @return the outbound route
+   */
   public Route getOutboundRoute() {
     return this.outboundRoute;
   }
 
+  /**
+   * Gets the inbound route associated with this line.
+   *
+   * @return the inbound route
+   */
   public Route getInboundRoute() {
     return this.inboundRoute;
   }
@@ -106,6 +141,9 @@ public class Line {
     return !issue.isIssueResolved();
   }
 
+  /**
+   * Creates a new issue on the line.
+   */
   public void createIssue() {
     this.issue.createIssue();
   }

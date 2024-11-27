@@ -1,5 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Represents an issue in the simulation.
+ */
 public class Issue {
   private int counter;
 
@@ -10,6 +13,11 @@ public class Issue {
     this.counter = 0;
   }
 
+  /**
+   * Retrieves the current value of the counter.
+   *
+   * @return the current value
+   */
   public int getCounter() {
     return counter;
   }

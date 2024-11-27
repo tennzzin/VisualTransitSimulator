@@ -2,7 +2,16 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.util.List;
 
+/**
+ * Load passengers onto vehicle.
+ */
 public class PassengerLoader {
+
+  /**
+   * Constructor for PassengerLoader.
+   */
+  public PassengerLoader() {
+  }
 
   /**
    * Loads a passenger.

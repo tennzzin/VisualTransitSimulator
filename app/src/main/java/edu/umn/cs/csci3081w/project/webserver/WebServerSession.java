@@ -13,6 +13,9 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+/**
+ * Manages a session for the visual transit simulation server.
+ */
 @ServerEndpoint(
     value = "/simulator",
     subprotocols = {"web_server"}
@@ -22,6 +25,9 @@ public class WebServerSession {
   private Session session;
   private WebServerSessionState webServerState;
 
+  /**
+   * Constructor for WebServerSession.
+   */
   public WebServerSession() {
     System.out.println("class loaded " + this.getClass());
   }
@@ -86,6 +92,11 @@ public class WebServerSession {
     }
   }
 
+  /**
+   * Called when an error occurs during the session.
+   *
+   * @param e the throwable error that occurred
+   */
   @OnError
   public void onError(Throwable e) {
     e.printStackTrace();

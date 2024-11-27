@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A command class that starts the simulation when executed.
+ */
 public class StartCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
@@ -43,6 +46,11 @@ public class StartCommand extends SimulatorCommand {
     simulator.start(timeBetweenVehicles, numTimeSteps);
   }
 
+  /**
+   * Gets the current simulation time, based on the current system hour.
+   *
+   * @return the current system hour
+   */
   public int getCurrentSimulationTime() {
     return LocalDateTime.now().getHour();
   }

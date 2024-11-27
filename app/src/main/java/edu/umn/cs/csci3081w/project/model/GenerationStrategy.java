@@ -1,5 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Interface representing a strategy for determining the type of vehicle to generate.
+ */
 public interface GenerationStrategy {
 
   /**

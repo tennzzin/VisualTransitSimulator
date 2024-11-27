@@ -6,10 +6,18 @@ import edu.umn.cs.csci3081w.project.model.Line;
 import edu.umn.cs.csci3081w.project.model.Route;
 import java.util.List;
 
+/**
+ * Handles the get routes command in the web server.
+ */
 public class GetRoutesCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
 
+  /**
+   * Constructor for GetRoutesCommand.
+   *
+   * @param simulator the visual transit simulator that contains routes data
+   */
   public GetRoutesCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

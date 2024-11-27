@@ -5,7 +5,14 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a vehicle in the simulation system.
+ */
 public abstract class Vehicle implements VehicleObserver {
+
+  /**
+   * For testing purposes.
+   */
   public static boolean TESTING = false;
   private int id;
   private int capacity;
@@ -51,54 +58,126 @@ public abstract class Vehicle implements VehicleObserver {
     carbonEmissionHistory = new ArrayList<Integer>();
   }
 
+  /**
+   * Abstract method for reporting the vehicle's details.
+   *
+   * @param out The PrintStream to which the report will be written
+   */
   public abstract void report(PrintStream out);
+
+  /**
+   * Abstract method for getting current CO2 emission.
+   *
+   * @return the current CO2 emission
+   */
 
   public abstract int getCurrentCO2Emission();
 
+  /**
+   * Gets ID of vehicle.
+   *
+   * @return the vehicle ID
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * Gets capacity of vehicle.
+   *
+   * @return the vehicle's capacity
+   */
   public int getCapacity() {
     return capacity;
   }
 
+  /**
+   * Gets speed of vehicle.
+   *
+   * @return the vehicle's speed
+   */
   public double getSpeed() {
     return speed;
   }
 
+  /**
+   * Gets the passenger loader for the vehicle.
+   *
+   * @return the passenger loader
+   */
   public PassengerLoader getPassengerLoader() {
     return loader;
   }
 
+  /**
+   * Gets the passenger unloader for the vehicle.
+   *
+   * @return the passenger unloader
+   */
   public PassengerUnloader getPassengerUnloader() {
     return unloader;
   }
 
+  /**
+   * Gets list of passengers currently on vehicle.
+   *
+   * @return the list of passengers
+   */
   public List<Passenger> getPassengers() {
     return passengers;
   }
 
+  /**
+   * Gets name of vehicle.
+   *
+   * @return the vehicle name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets the name of vehicle.
+   *
+   * @param name the name to set
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Gets the current position of vehicle.
+   *
+   * @return the position
+   */
   public Position getPosition() {
     return position;
   }
 
+  /**
+   * Sets the position of vehicle.
+   *
+   * @param position the position to set
+   */
   public void setPosition(Position position) {
     this.position = position;
   }
 
+  /**
+   * Checks if vehicle's trip is complete.
+   *
+   * @return true if the trip is complete, false otherwise
+   */
   public boolean isTripComplete() {
     return line.getOutboundRoute().isAtEnd() && line.getInboundRoute().isAtEnd();
   }
 
+  /**
+   * Loads a new passenger onto vehicle.
+   *
+   * @param newPassenger the passenger to be loaded
+   * @return the number of passengers loaded
+   */
   public int loadPassenger(Passenger newPassenger) {
     return getPassengerLoader().loadPassenger(newPassenger, getCapacity(), getPassengers());
   }
@@ -206,6 +285,12 @@ public abstract class Vehicle implements VehicleObserver {
     }
   }
 
+  /**
+   * Updates the distance remaining.
+   * Train does not move if speed is negative or train is at end of route
+   *
+   * @return the effective speed of the vehicle
+   */
   private double updateDistance() {
     // Updates the distance remaining and returns the effective speed of the bus
     // Bus does not move if speed is negative or bus is at end of route
@@ -219,6 +304,11 @@ public abstract class Vehicle implements VehicleObserver {
     return getSpeed();
   }
 
+  /**
+   * gets current route for the vehicle.
+   *
+   * @return the outboudRoute if that route has not ended, else returns InboundRoute
+   */
   private Route currentRoute() {
     // Figure out if we're on the outgoing or incoming route
     if (!line.getOutboundRoute().isAtEnd()) {
@@ -227,14 +317,29 @@ public abstract class Vehicle implements VehicleObserver {
     return line.getInboundRoute();
   }
 
+  /**
+   * Gets the bus's next stop on route.
+   *
+   * @return the next stop
+   */
   public Stop getNextStop() {
     return nextStop;
   }
 
+  /**
+   * Gets the line of bus.
+   *
+   * @return the line of bus
+   */
   public Line getLine() {
     return line;
   }
 
+  /**
+   * Gets the distance remaining for the route.
+   *
+   * @return the distance remaining
+   */
   public double getDistanceRemaining() {
     return distanceRemaining;
   }
@@ -304,10 +409,20 @@ public abstract class Vehicle implements VehicleObserver {
     }
   }
 
+  /**
+   * Gets test output in JSON format.
+   *
+   * @return the test output
+   */
   public JsonObject getTestOutput() {
     return testOutput;
   }
 
+  /**
+   * Sets the vehicle concrete subject that will be used for observing the vehicle.
+   *
+   * @param vehicleConcreteSubject the concrete subject to set
+   */
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;
   }

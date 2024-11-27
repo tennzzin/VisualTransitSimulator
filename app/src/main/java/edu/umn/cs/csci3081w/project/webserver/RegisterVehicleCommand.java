@@ -4,10 +4,18 @@ import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.Vehicle;
 import java.util.List;
 
+/**
+ * Command that registers a vehicle as an observer in the simulation.
+ */
 public class RegisterVehicleCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
 
+  /**
+   * Constructor for RegisterVehicleCommand.
+   *
+   * @param simulator the simulator instance where the vehicle will be registered
+   */
   public RegisterVehicleCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

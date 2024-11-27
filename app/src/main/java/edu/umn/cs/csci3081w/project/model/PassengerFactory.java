@@ -2,18 +2,39 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.util.Random;
 
+/**
+ * Factory class for generating Passenger objects.
+ */
 public class PassengerFactory {
+
+  /**
+   * Constructor for PassengerFactory.
+   */
+  private PassengerFactory() {
+  }
   private static final String[] namePrefix;
   private static final String[] nameSuffix;
   private static final String[] nameStemsArray;
   private static Random rand;
-  //variable added to make testing deterministic
+
+  /**
+   * Variable added to make testing deterministic.
+   */
   public static boolean DETERMINISTIC = false;
-  //deterministic set of names for testing purposes
+
+  /**
+   * Deterministic set of names for testing purposes.
+   */
   public static final String[] DETERMINISTIC_NAMES = {"Goldy", "President", "Coach"};
-  //deterministic names count
+
+  /**
+   * Deterministic names count.
+   */
   public static int DETERMINISTIC_NAMES_COUNT = 0;
-  //deterministic destination count
+
+  /**
+   * Deterministic destination count.
+   */
   public static int DETERMINISTIC_DESTINATION_COUNT = 0;
 
   static {

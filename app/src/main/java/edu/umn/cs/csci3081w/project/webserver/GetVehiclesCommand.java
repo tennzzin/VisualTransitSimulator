@@ -9,10 +9,18 @@ import edu.umn.cs.csci3081w.project.model.SmallBus;
 import edu.umn.cs.csci3081w.project.model.Vehicle;
 import java.util.List;
 
+/**
+ * Handles requests to retrieve list of active vehicles from the simulation.
+ */
 public class GetVehiclesCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
 
+  /**
+   * Constructor for GetVehiclesCommand.
+   *
+   * @param simulator the visual transit simulator that contains the vehicle data
+   */
   public GetVehiclesCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

@@ -2,9 +2,24 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.io.PrintStream;
 
+/**
+ * Represents a Diesel Train vehicle, inheriting from the Train class.
+ */
 public class DieselTrain extends Train {
+
+  /**
+   * Constant representing type of vehicle.
+   */
   public static final String DIESEL_TRAIN_VEHICLE = "DIESEL_TRAIN_VEHICLE";
+
+  /**
+   * Constant representing speed of train.
+   */
   public static final double SPEED = 1;
+
+  /**
+   * Constant representing capacity of train.
+   */
   public static final int CAPACITY = 120;
 
   /**

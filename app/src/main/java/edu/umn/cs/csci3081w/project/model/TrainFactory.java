@@ -1,5 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Factory class responsible for creating and managing train vehicles.
+ */
 public class TrainFactory implements VehicleFactory {
   private GenerationStrategy generationStrategy;
   private Counter counter;

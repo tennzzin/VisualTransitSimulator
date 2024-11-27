@@ -2,6 +2,9 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.io.PrintStream;
 
+/**
+ * Represents a passenger in the vehicle transit simulation.
+ */
 public class Passenger {
 
   private String name;
@@ -33,14 +36,27 @@ public class Passenger {
     }
   }
 
+  /**
+   * Initializes passenger's time on vehicle to 1.
+   */
   public void setOnVehicle() {
     timeOnVehicle = 1;
   }
 
+  /**
+   * Checks if passenger is currently on vehicle.
+   *
+   * @return true if passenger is on vehicle, false otherwise
+   */
   public boolean isOnVehicle() {
     return timeOnVehicle > 0;
   }
 
+  /**
+   * Gets the ID of the destination stop.
+   *
+   * @return the destination stop ID
+   */
   public int getDestination() {
     return destinationStopId;
   }
@@ -59,10 +75,20 @@ public class Passenger {
     out.println("####Passenger Info End####");
   }
 
+  /**
+   * Gets time passenger has waited at stop.
+   *
+   * @return the wait time at stop
+   */
   public int getWaitAtStop() {
     return waitAtStop;
   }
 
+  /**
+   * Gets passenger time on vehicle.
+   *
+   * @return the time on vehicle
+   */
   public int getTimeOnVehicle() {
     return timeOnVehicle;
   }
