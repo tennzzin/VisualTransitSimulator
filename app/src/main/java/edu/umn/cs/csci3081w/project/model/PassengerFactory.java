@@ -12,6 +12,7 @@ public class PassengerFactory {
    */
   private PassengerFactory() {
   }
+
   private static final String[] namePrefix;
   private static final String[] nameSuffix;
   private static final String[] nameStemsArray;
