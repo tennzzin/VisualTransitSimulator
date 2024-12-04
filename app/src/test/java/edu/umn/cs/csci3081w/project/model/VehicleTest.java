@@ -1,6 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ public class VehicleTest {
   private Vehicle testVehicle;
   private Route testRouteIn;
   private Route testRouteOut;
+  private Line line;
+  private VehicleConcreteSubject subject;
 
 
   /**
@@ -176,6 +180,26 @@ public class VehicleTest {
         + "* Passengers: 0" + System.lineSeparator()
         + "* CO2: 0" + System.lineSeparator();
     assertEquals(expectedText, observedText);
+  }
+
+  @Test
+  void testProvideInfo2() {
+    Line line = mock(Line.class);
+    Route mockedRoute = mock(Route.class);
+    Stop mockedStop = mock(Stop.class);
+    Position mockedPosition = mock(Position.class);
+    when(mockedStop.getPosition()).thenReturn(mockedPosition);
+    when(mockedPosition.getLongitude()).thenReturn(-93.243774);
+    when(mockedPosition.getLatitude()).thenReturn(44.972392);
+    when(line.getOutboundRoute()).thenReturn(mockedRoute);
+    when(mockedRoute.getNextStop()).thenReturn(mockedStop);
+    subject = mock(VehicleConcreteSubject.class);
+    testVehicle = new SmallBus(1, line, 50, 5.0);
+    testVehicle.setVehicleSubject(subject);
+    Vehicle.TESTING = true;
+    boolean result = testVehicle.provideInfo();
+    assertFalse(result);
+    assertNotNull(testVehicle.getTestOutput());
   }
 
   /**
