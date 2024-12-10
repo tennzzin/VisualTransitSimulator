@@ -8,9 +8,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 public class TrainFactoryTest {
   private StorageFacility storageFacility;
   private TrainFactory trainFactory;
+  private Counter counter;
 
   /**
    * Setup operations.
@@ -115,5 +117,17 @@ public class TrainFactoryTest {
     assertEquals(4, trainFactory.getStorageFacility().getElectricTrainsNum());
     assertEquals(3, trainFactory.getStorageFacility().getDieselTrainsNum());
 
+  }
+
+  /**
+   * Testing the constructor for TrainFactory with night-time generation strategy.
+   */
+  @Test
+  public void testConstructorNightTime() {
+    storageFacility = new StorageFacility(0, 0, 3, 3);
+    counter = new Counter();
+    trainFactory = new TrainFactory(storageFacility, counter, 9);  // 9 AM (Daytime)
+    TrainFactory nightFactory = new TrainFactory(storageFacility, counter, 20);
+    assertTrue(nightFactory.getGenerationStrategy() instanceof TrainStrategyNight);
   }
 }

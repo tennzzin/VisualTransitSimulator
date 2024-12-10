@@ -1,7 +1,9 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -19,7 +21,9 @@ public class VehicleTest {
   private Vehicle testVehicle;
   private Route testRouteIn;
   private Route testRouteOut;
+  private LargeBus largeBus;
   private TestVehicleDataSender testSender;
+  private ElectricTrain electricTrain;
 
 
   /**
@@ -257,6 +261,73 @@ public class VehicleTest {
 
     String observedText = capturedData.get("text").getAsString();
     assertEquals(expectedText, observedText);
+  }
+
+  /**
+   * Tests move and update functions with mock behaviors.
+   */
+  @Test
+  public void testMoveAndUpdateWithMock() {
+    Line mockLine = mock(Line.class);
+    Route mockRoute = mock(Route.class);
+    Stop mockStop = mock(Stop.class);
+    when(mockRoute.getNextStop()).thenReturn(mockStop);
+    when(mockStop.getName()).thenReturn("Mock Stop");
+    when(mockLine.getOutboundRoute()).thenReturn(mockRoute);
+    when(mockLine.getInboundRoute()).thenReturn(mockRoute);
+    Vehicle mockVehicle = mock(Vehicle.class);
+    when(mockVehicle.getLine()).thenReturn(mockLine);
+    when(mockVehicle.getNextStop()).thenReturn(mockStop);
+    mockVehicle.move();
+    assertEquals("Mock Stop", mockVehicle.getNextStop().getName());
+  }
+
+  /**
+   * Test the provideInfo method for LargeBus when trip is not complete.
+   */
+  @Test
+  public void testProvideInfoLargeBusNotComplete() {
+    testSender = new TestVehicleDataSender();
+    Route mockRoute = mock(Route.class);
+    Stop mockStop = mock(Stop.class);
+    when(mockRoute.getNextStop()).thenReturn(mockStop);
+    when(mockStop.getName()).thenReturn("Mock Stop");
+    when(mockStop.getPosition()).thenReturn(new Position(-93.243774, 44.972392));  // Mock Position
+    Line mockLine = mock(Line.class);
+    when(mockLine.getOutboundRoute()).thenReturn(mockRoute);
+    when(mockLine.getInboundRoute()).thenReturn(mockRoute);
+    largeBus = new LargeBus(1, mockLine, 50, 4.0);
+    largeBus.setDataSender(testSender);
+    when(largeBus.isTripComplete()).thenReturn(false);
+    boolean tripCompleted = largeBus.provideInfo();
+    JsonObject capturedData = testSender.getTestOutput();
+    String text = capturedData.get("text").getAsString();
+    assertTrue(text.contains(LargeBus.LARGE_BUS_VEHICLE));
+    assertFalse(tripCompleted);
+  }
+
+  /**
+   * Test the provideInfo method for ElectricTrain trip is complete.
+   */
+  @Test
+  public void testProvideInfoElectricTrainComplete() {
+    testSender = new TestVehicleDataSender();
+    Route mockRoute = mock(Route.class);
+    Stop mockStop = mock(Stop.class);
+    when(mockRoute.getNextStop()).thenReturn(mockStop);
+    when(mockStop.getName()).thenReturn("Mock Stop");
+    when(mockStop.getPosition()).thenReturn(new Position(-93.243774, 44.972392));  // Mock Position
+    Line mockLine = mock(Line.class);
+    when(mockLine.getOutboundRoute()).thenReturn(mockRoute);
+    when(mockLine.getInboundRoute()).thenReturn(mockRoute);
+    electricTrain = new ElectricTrain(1, mockLine, 50, 4.0);
+    electricTrain.setDataSender(testSender);  // Inject the real sender
+    when(electricTrain.isTripComplete()).thenReturn(true);
+    boolean tripCompleted = electricTrain.provideInfo();
+    JsonObject capturedData = testSender.getTestOutput();
+    String text = capturedData.get("text").getAsString();
+    assertEquals("", text);
+    assertTrue(tripCompleted);
   }
 
   /**
