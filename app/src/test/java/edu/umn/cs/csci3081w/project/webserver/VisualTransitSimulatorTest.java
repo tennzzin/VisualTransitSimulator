@@ -1,19 +1,17 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import edu.umn.cs.csci3081w.project.model.Line;
 import edu.umn.cs.csci3081w.project.webserver.VisualTransitSimulator;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VisualTransitSimulatorTest {
 
@@ -21,6 +19,10 @@ public class VisualTransitSimulatorTest {
   private WebServerSession mockSession;
   private String configFile;
   private List<Integer> timeSinceLastVehicle;
+
+  /**
+   * Setup the mock simulation.
+   */
   @BeforeEach
   public void setUp() {
     configFile = "Config.txt";;
