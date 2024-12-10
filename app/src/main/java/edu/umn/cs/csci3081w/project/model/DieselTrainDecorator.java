@@ -1,9 +1,17 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import java.awt.*;
-import java.io.PrintStream;
+import java.awt.Color;
 
-public class DieselTrainDecorator extends VehicleDecorator{
+/**
+ * Decorator class for Diesel Train.
+ */
+public class DieselTrainDecorator extends VehicleDecorator {
+
+  /**
+   * Constructor for DieselTrainDecorator.
+   *
+   * @param vehicle the vehicle to be decorated
+   */
   public DieselTrainDecorator(Vehicle vehicle) {
     super(vehicle);
     setColor(new Color(255, 204, 51, 255));

@@ -1,8 +1,17 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import java.awt.*;
+import java.awt.Color;
 
-public class SmallBusDecorator extends VehicleDecorator{
+/**
+ * Decorator class for Small Bus.
+ */
+public class SmallBusDecorator extends VehicleDecorator {
+
+  /**
+   * Constructor for SmallBusDecorator.
+   *
+   * @param vehicle the vehicle to be decorated
+   */
   public SmallBusDecorator(Vehicle vehicle) {
     super(vehicle);
     setColor(new Color(122, 0, 25, 255));

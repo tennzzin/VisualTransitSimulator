@@ -1,34 +1,62 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import com.google.gson.JsonObject;
-
-import java.awt.*;
-import java.util.List;
+import java.awt.Color;
 import java.io.PrintStream;
+import java.util.List;
 
-public class VehicleDecorator extends Vehicle{
+/**
+ * Decorator class for Vehicle Decorator.
+ */
+public class VehicleDecorator extends Vehicle {
   private Vehicle vehicle;
   private Color color;
 
+  /**
+   * Constructor for VehicleDecorator.
+   *
+   * @param vehicle the vehicle to be decorated
+   */
   public VehicleDecorator(Vehicle vehicle) {
     this.vehicle = vehicle;
   }
 
+  /**
+   * Sets the color of vehicle.
+   *
+   * @param color the vehicle's color
+   */
   public void setColor(Color color) {
     this.color = color;
   }
 
+  /**
+   * Gets color of vehicle.
+   *
+   * @return the vehicle's color
+   */
   public Color getColor() {
     return color;
   }
 
+  /**
+   * Gets the vehicle.
+   *
+   * @return the vehicle
+   */
   public Vehicle getVehicle() {
     return vehicle;
   }
 
+  /**
+   * Sets the vehicle.
+   *
+   * @param vehicle the vehicle
+   */
   public void setVehicle(Vehicle vehicle) {
     this.vehicle = vehicle;
   }
+
   @Override
   public void report(PrintStream out) {
     vehicle.report(out);

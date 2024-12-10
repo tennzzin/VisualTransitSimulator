@@ -1,7 +1,6 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import com.google.gson.JsonObject;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +58,9 @@ public abstract class Vehicle implements VehicleObserver {
     carbonEmissionHistory = new ArrayList<Integer>();
   }
 
+  /**
+   * Default constructor for Vehicle.
+   */
   public Vehicle() {
   }
 

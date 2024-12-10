@@ -12,7 +12,6 @@ import edu.umn.cs.csci3081w.project.model.SmallBus;
 import edu.umn.cs.csci3081w.project.model.SmallBusDecorator;
 import edu.umn.cs.csci3081w.project.model.Vehicle;
 import edu.umn.cs.csci3081w.project.model.VehicleDecorator;
-
 import java.awt.Color;
 import java.util.List;
 
@@ -72,9 +71,9 @@ public class GetVehiclesCommand extends SimulatorCommand {
       s.add("position", positionJsonObject);
       Color color;
       if (currVehicle instanceof VehicleDecorator) {
-        color = ((VehicleDecorator)currVehicle).getColor();
+        color = ((VehicleDecorator) currVehicle).getColor();
       } else {
-        color = new Color(255,255,255,255);
+        color = new Color(255, 255, 255, 255);
       }
       JsonObject colorJsonObject = new JsonObject();
       colorJsonObject.addProperty("r", color.getRed());
