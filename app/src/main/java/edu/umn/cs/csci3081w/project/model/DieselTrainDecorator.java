@@ -1,0 +1,21 @@
+package edu.umn.cs.csci3081w.project.model;
+
+import java.awt.*;
+import java.io.PrintStream;
+
+public class DieselTrainDecorator extends VehicleDecorator{
+  public DieselTrainDecorator(Vehicle vehicle) {
+    super(vehicle);
+    setColor(new Color(255, 204, 51, 255));
+  }
+
+  @Override
+  public void update() {
+    super.update();
+    if (getLine().isIssueExist()) {
+      this.setVehicle(new TransparentDieselTrainDecorator(this.getVehicle()));
+    } else {
+      setColor(new Color(255, 204, 51, 255));
+    }
+  }
+}

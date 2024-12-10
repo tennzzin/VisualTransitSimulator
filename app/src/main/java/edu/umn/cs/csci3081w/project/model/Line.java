@@ -1,7 +1,10 @@
 package edu.umn.cs.csci3081w.project.model;
 
+import java.awt.*;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents a line in the vehicle transit simulation.
@@ -17,6 +20,7 @@ public class Line {
    * Constant for train line type.
    */
   public static final String TRAIN_LINE = "TRAIN_LINE";
+  private List<Vehicle> vehicles;
   private int id;
   private String name;
   private String type;
@@ -42,6 +46,7 @@ public class Line {
     this.outboundRoute = outboundRoute;
     this.inboundRoute = inboundRoute;
     this.issue = issue;
+    this.vehicles = new ArrayList<>();
   }
 
   /**
@@ -78,6 +83,9 @@ public class Line {
   public void update() {
     outboundRoute.update();
     inboundRoute.update();
+    for (Vehicle vehicle : vehicles) {
+      vehicle.update();
+    }
     if (this.issue != null && !this.issue.isIssueResolved()) {
       this.issue.decrementCounter();
     }
@@ -129,7 +137,7 @@ public class Line {
   }
 
   /**
-   * Check whether an issue exsist on the line.
+   * Check whether an issue exist on the line.
    *
    * @return whether an issue exist
    */
@@ -147,4 +155,6 @@ public class Line {
   public void createIssue() {
     this.issue.createIssue();
   }
+
 }
+

@@ -1,6 +1,7 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import com.google.gson.JsonObject;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,9 @@ public abstract class Vehicle implements VehicleObserver {
     setPosition(new Position(nextStop.getPosition().getLongitude(),
         nextStop.getPosition().getLatitude()));
     carbonEmissionHistory = new ArrayList<Integer>();
+  }
+
+  public Vehicle() {
   }
 
   /**
