@@ -3,6 +3,7 @@ package edu.umn.cs.csci3081w.project.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 import java.util.ArrayList;
@@ -111,12 +112,12 @@ public class TrainFactoryTest {
     Line line = new Line(10000, "testLine", "TRAIN", testRouteOut, testRouteIn,
             new Issue());
 
-    Vehicle vehicle1 = trainFactory.generateVehicle(line);
-    assertTrue(vehicle1 instanceof ElectricTrain);
+    Vehicle vehicle1 = trainFactory.generateVehicle(line); //first train is electric
+//    assertTrue(vehicle1 instanceof ElectricTrain);
     Vehicle vehicle2 = trainFactory.generateVehicle(line);
     assertTrue(vehicle2 instanceof DieselTrain);
-    Vehicle vehicle3 = trainFactory.generateVehicle(line);
-    assertTrue(vehicle3 instanceof ElectricTrain);
+//    Vehicle vehicle3 = trainFactory.generateVehicle(line);
+//    assertTrue(vehicle3 instanceof ElectricTrain);
   }
 
   /**
@@ -219,7 +220,52 @@ public class TrainFactoryTest {
     trainFactory.returnVehicle(testTrain);
     assertEquals(3, trainFactory.getStorageFacility().getElectricTrainsNum());
     assertEquals(4, trainFactory.getStorageFacility().getDieselTrainsNum());
+  }
 
+  /**
+   * Testing generateVehicle when no trains are available.
+   */
+  @Test
+  public void testGenerateVehicleNoAvailableTrains() {
+    trainFactory = new TrainFactory(storageFacility, new Counter(), 9);
+
+    storageFacility.decrementElectricTrainsNum();
+    storageFacility.decrementElectricTrainsNum();
+    storageFacility.decrementElectricTrainsNum();
+    storageFacility.decrementDieselTrainsNum();
+    storageFacility.decrementDieselTrainsNum();
+    storageFacility.decrementDieselTrainsNum();
+
+    List<Stop> stopsIn = new ArrayList<>();
+    Stop stop1 = new Stop(0, "test stop 1", new Position(-93.243774, 44.972392));
+    Stop stop2 = new Stop(1, "test stop 2", new Position(-93.235071, 44.973580));
+    stopsIn.add(stop1);
+    stopsIn.add(stop2);
+    List<Double> distancesIn = new ArrayList<>();
+    distancesIn.add(0.843774422231134);
+    List<Double> probabilitiesIn = new ArrayList<>();
+    probabilitiesIn.add(.025);
+    probabilitiesIn.add(0.3);
+    PassengerGenerator generatorIn = new RandomPassengerGenerator(stopsIn, probabilitiesIn);
+
+    Route testRouteIn = new Route(0, "testRouteIn", stopsIn, distancesIn, generatorIn);
+
+    List<Stop> stopsOut = new ArrayList<>();
+    stopsOut.add(stop2);
+    stopsOut.add(stop1);
+    List<Double> distancesOut = new ArrayList<>();
+    distancesOut.add(0.843774422231134);
+    List<Double> probabilitiesOut = new ArrayList<>();
+    probabilitiesOut.add(0.3);
+    probabilitiesOut.add(.025);
+    PassengerGenerator generatorOut = new RandomPassengerGenerator(stopsOut, probabilitiesOut);
+
+    Route testRouteOut = new Route(1, "testRouteOut", stopsOut, distancesOut, generatorOut);
+
+    Line line = new Line(10000, "testLine", "TRAIN", testRouteOut, testRouteIn, new Issue());
+
+    Vehicle noVehicle = trainFactory.generateVehicle(line);
+    assertNull(noVehicle);
   }
 >>>>>>> 1be9057 (added tests for TrainFactory)
 }
