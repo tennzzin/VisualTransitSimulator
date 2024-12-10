@@ -113,11 +113,8 @@ public class TrainFactoryTest {
             new Issue());
 
     Vehicle vehicle1 = trainFactory.generateVehicle(line); //first train is electric
-//    assertTrue(vehicle1 instanceof ElectricTrain);
     Vehicle vehicle2 = trainFactory.generateVehicle(line);
     assertTrue(vehicle2 instanceof DieselTrain);
-//    Vehicle vehicle3 = trainFactory.generateVehicle(line);
-//    assertTrue(vehicle3 instanceof ElectricTrain);
   }
 
   /**
