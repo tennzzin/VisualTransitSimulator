@@ -13,7 +13,6 @@ public abstract class Vehicle implements VehicleObserver {
   /**
    * For testing purposes.
    */
-  public static boolean TESTING = false;
   private int id;
   private int capacity;
   //the speed is in distance over a time unit
@@ -27,8 +26,8 @@ public abstract class Vehicle implements VehicleObserver {
   private double distanceRemaining;
   private Stop nextStop;
   private List<Integer> carbonEmissionHistory;
+  private VehicleDataSender dataSender = new RealVehicleDataSender();
   private VehicleConcreteSubject vehicleConcreteSubject;
-  private JsonObject testOutput;
 
 
   /**
@@ -59,9 +58,18 @@ public abstract class Vehicle implements VehicleObserver {
   }
 
   /**
+<<<<<<< HEAD
    * Default constructor for Vehicle.
    */
   public Vehicle() {
+=======
+   * Sets the data sender for the vehicle (used in testing).
+   *
+   * @param dataSender the data sender to set
+   */
+  public void setDataSender(VehicleDataSender dataSender) {
+    this.dataSender = dataSender;
+>>>>>>> cec96d1 (refractored VehicleTest, refracorted WebServerSessionTest, implemented TestVehicleDataSender, RealVehicleDataSender, and RealVehicleDataSender)
   }
 
   /**
@@ -357,9 +365,9 @@ public abstract class Vehicle implements VehicleObserver {
    */
   public boolean provideInfo() {
     boolean tripCompleted = false;
+    JsonObject data = new JsonObject();
+    data.addProperty("command", "observedVehicle");
     if (!isTripComplete()) {
-      JsonObject data = new JsonObject();
-      data.addProperty("command", "observedVehicle");
 
       String type = "";
       if (this instanceof SmallBus) {
@@ -394,42 +402,39 @@ public abstract class Vehicle implements VehicleObserver {
           + System.lineSeparator());
 
       data.addProperty("text", stringBuilder.toString());
-      if (TESTING) {
-        testOutput = data;
-      } else {
-        vehicleConcreteSubject.getSession().sendJson(data);
-      }
-      tripCompleted = false;
-      return tripCompleted;
     } else {
-      JsonObject data = new JsonObject();
-      data.addProperty("command", "observedVehicle");
       data.addProperty("text", "");
-      if (TESTING) {
-        testOutput = data;
-      } else {
-        vehicleConcreteSubject.getSession().sendJson(data);
-      }
       tripCompleted = true;
-      return tripCompleted;
     }
+
+    dataSender.send(data);
+    return tripCompleted;
   }
 
-  /**
-   * Gets test output in JSON format.
-   *
-   * @return the test output
-   */
-  public JsonObject getTestOutput() {
-    return testOutput;
-  }
-
-  /**
-   * Sets the vehicle concrete subject that will be used for observing the vehicle.
-   *
-   * @param vehicleConcreteSubject the concrete subject to set
-   */
+  @Override
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;
   }
+<<<<<<< HEAD
 }
+=======
+
+//  /**
+//   * Gets test output in JSON format.
+//   *
+//   * @return the test output
+//   */
+//  public JsonObject getTestOutput() {
+//    return testOutput;
+//  }
+//
+//  /**
+//   * Sets the vehicle concrete subject that will be used for observing the vehicle.
+//   *
+//   * @param vehicleConcreteSubject the concrete subject to set
+//   */
+//  public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
+//    this.vehicleConcreteSubject = vehicleConcreteSubject;
+//  }
+}
+>>>>>>> cec96d1 (refractored VehicleTest, refracorted WebServerSessionTest, implemented TestVehicleDataSender, RealVehicleDataSender, and RealVehicleDataSender)

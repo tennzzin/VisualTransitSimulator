@@ -1,10 +1,7 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -18,8 +15,7 @@ public class VehicleTest {
   private Vehicle testVehicle;
   private Route testRouteIn;
   private Route testRouteOut;
-  private Line line;
-  private VehicleConcreteSubject subject;
+  private TestVehicleDataSender testSender;
 
 
   /**
@@ -31,7 +27,7 @@ public class VehicleTest {
     PassengerFactory.DETERMINISTIC_NAMES_COUNT = 0;
     PassengerFactory.DETERMINISTIC_DESTINATION_COUNT = 0;
     RandomPassengerGenerator.DETERMINISTIC = true;
-    Vehicle.TESTING = true;
+
     List<Stop> stopsIn = new ArrayList<Stop>();
     Stop stop1 = new Stop(0, "test stop 1", new Position(-93.243774, 44.972392));
     Stop stop2 = new Stop(1, "test stop 2", new Position(-93.235071, 44.973580));
@@ -60,9 +56,11 @@ public class VehicleTest {
     testRouteOut = new Route(1, "testRouteOut",
         stopsOut, distancesOut, generatorOut);
 
+    testSender = new TestVehicleDataSender();
     testVehicle = new VehicleTestImpl(1, new Line(10000, "testLine",
         "VEHICLE_LINE", testRouteOut, testRouteIn,
         new Issue()), 3, 1.0, new PassengerLoader(), new PassengerUnloader());
+    testVehicle.setDataSender(testSender);
   }
 
   /**
@@ -170,11 +168,13 @@ public class VehicleTest {
   public void testProvideInfo() {
     testVehicle.update();
     testVehicle.provideInfo();
-    JsonObject testOutput = testVehicle.getTestOutput();
-    String command = testOutput.get("command").getAsString();
+    JsonObject capturedData = testSender.getTestOutput();
+
+    String command = capturedData.get("command").getAsString();
     String expectedCommand = "observedVehicle";
     assertEquals(expectedCommand, command);
-    String observedText = testOutput.get("text").getAsString();
+
+    String observedText = capturedData.get("text").getAsString();
     String expectedText = "1" + System.lineSeparator()
         + "-----------------------------" + System.lineSeparator()
         + "* Type: " + System.lineSeparator()
@@ -184,24 +184,75 @@ public class VehicleTest {
     assertEquals(expectedText, observedText);
   }
 
+  /**
+   * Tests provideInfo functionality using mocks.
+   */
   @Test
-  void testProvideInfo2() {
-    Line line = mock(Line.class);
-    Route mockedRoute = mock(Route.class);
-    Stop mockedStop = mock(Stop.class);
-    Position mockedPosition = mock(Position.class);
-    when(mockedStop.getPosition()).thenReturn(mockedPosition);
-    when(mockedPosition.getLongitude()).thenReturn(-93.243774);
-    when(mockedPosition.getLatitude()).thenReturn(44.972392);
-    when(line.getOutboundRoute()).thenReturn(mockedRoute);
-    when(mockedRoute.getNextStop()).thenReturn(mockedStop);
-    subject = mock(VehicleConcreteSubject.class);
-    testVehicle = new SmallBus(1, line, 50, 5.0);
-    testVehicle.setVehicleSubject(subject);
-    Vehicle.TESTING = true;
-    boolean result = testVehicle.provideInfo();
-    assertFalse(result);
-    assertNotNull(testVehicle.getTestOutput());
+  public void testProvideInfoWithMocks() {
+    //mock Route and Stops for outbound
+    Route mockedOutboundRoute = mock(Route.class);
+    Stop mockedPrevStopOutbound = mock(Stop.class);
+    Stop mockedNextStopOutbound = mock(Stop.class);
+    Position mockedPrevPositionOutbound = mock(Position.class);
+    Position mockedNextPositionOutbound = mock(Position.class);
+
+    //set up outbound route
+    when(mockedOutboundRoute.prevStop()).thenReturn(mockedPrevStopOutbound);
+    when(mockedOutboundRoute.getNextStop()).thenReturn(mockedNextStopOutbound);
+    when(mockedPrevStopOutbound.getPosition()).thenReturn(mockedPrevPositionOutbound);
+    when(mockedNextStopOutbound.getPosition()).thenReturn(mockedNextPositionOutbound);
+    doReturn(-93.243774d).when(mockedPrevPositionOutbound).getLongitude();
+    doReturn(44.972392d).when(mockedPrevPositionOutbound).getLatitude();
+    doReturn(-93.235071d).when(mockedNextPositionOutbound).getLongitude();
+    doReturn(44.973580d).when(mockedNextPositionOutbound).getLatitude();
+
+    //mock Route and Stops for inbound
+    Route mockedInboundRoute = mock(Route.class);
+    Stop mockedPrevStopInbound = mock(Stop.class);
+    Stop mockedNextStopInbound = mock(Stop.class);
+    Position mockedPrevPositionInbound = mock(Position.class);
+    Position mockedNextPositionInbound = mock(Position.class);
+
+    //set up inbound route
+    when(mockedInboundRoute.prevStop()).thenReturn(mockedPrevStopInbound);
+    when(mockedInboundRoute.getNextStop()).thenReturn(mockedNextStopInbound);
+    when(mockedPrevStopInbound.getPosition()).thenReturn(mockedPrevPositionInbound);
+    when(mockedNextStopInbound.getPosition()).thenReturn(mockedNextPositionInbound);
+    doReturn(-93.235071d).when(mockedPrevPositionInbound).getLongitude();
+    doReturn(44.973580d).when(mockedPrevPositionInbound).getLatitude();
+    doReturn(-93.243774d).when(mockedNextPositionInbound).getLongitude();
+    doReturn(44.972392d).when(mockedNextPositionInbound).getLatitude();
+
+    //mock Line and set outbound and inbound routes
+    Line mockedLine = mock(Line.class);
+    when(mockedLine.getOutboundRoute()).thenReturn(mockedOutboundRoute);
+    when(mockedLine.getInboundRoute()).thenReturn(mockedInboundRoute);
+
+    TestVehicleDataSender testSenderMock = new TestVehicleDataSender(); //create TestVehicleDataSender
+    Vehicle realVehicle = new SmallBus(1, mockedLine, 50, 5.0);
+    Vehicle spyVehicle = spy(realVehicle); //spy on the real vehicle
+    spyVehicle.setDataSender(testSenderMock);
+
+    //stub getCurrentCO2Emission() to return 0
+    doReturn(0).when(spyVehicle).getCurrentCO2Emission();
+
+    spyVehicle.update();
+    spyVehicle.provideInfo();
+
+    //verify captured data
+    JsonObject capturedData = testSenderMock.getTestOutput();
+    assertNotNull(capturedData);
+    assertEquals("observedVehicle", capturedData.get("command").getAsString());
+
+    String expectedText = "1" + System.lineSeparator()
+        + "-----------------------------" + System.lineSeparator()
+        + "* Type: SMALL_BUS_VEHICLE" + System.lineSeparator()
+        + "* Position: (-93.243774,44.972392)" + System.lineSeparator()
+        + "* Passengers: 0" + System.lineSeparator()
+        + "* CO2: 0" + System.lineSeparator();
+
+    String observedText = capturedData.get("text").getAsString();
+    assertEquals(expectedText, observedText);
   }
 
   /**

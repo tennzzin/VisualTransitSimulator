@@ -25,7 +25,7 @@ public class VehicleConcreteSubjectTest {
     PassengerFactory.DETERMINISTIC_NAMES_COUNT = 0;
     PassengerFactory.DETERMINISTIC_DESTINATION_COUNT = 0;
     RandomPassengerGenerator.DETERMINISTIC = true;
-    Vehicle.TESTING = true;
+
     List<Stop> stopsIn = new ArrayList<Stop>();
     Stop stop1 = new Stop(0, "test stop 1", new Position(-93.243774, 44.972392));
     Stop stop2 = new Stop(1, "test stop 2", new Position(-93.235071, 44.973580));
@@ -57,6 +57,8 @@ public class VehicleConcreteSubjectTest {
     testVehicle = new VehicleTestImpl(1, new Line(10000, "testLine",
         "VEHICLE_LINE", testRouteOut, testRouteIn,
         new Issue()), 3, 1.0, new PassengerLoader(), new PassengerUnloader());
+    TestVehicleDataSender testSender = new TestVehicleDataSender();
+    testVehicle.setDataSender(testSender); // Inject the test sender for mocking behavior
   }
 
   /**
@@ -97,16 +99,22 @@ public class VehicleConcreteSubjectTest {
    */
   @Test
   public void testNotifyObservers() {
+    TestVehicleDataSender testSender = new TestVehicleDataSender();
+    testVehicle.setDataSender(testSender);
+
     VehicleConcreteSubject vehicleConcreteSubject =
         new VehicleConcreteSubject(new WebServerSession());
     vehicleConcreteSubject.attachObserver(testVehicle);
+
     testVehicle.update();
     vehicleConcreteSubject.notifyObservers();
-    JsonObject testOutput = testVehicle.getTestOutput();
-    String command = testOutput.get("command").getAsString();
+    JsonObject capturedData = testSender.getTestOutput();
+
+    String command = capturedData.get("command").getAsString();
     String expectedCommand = "observedVehicle";
     assertEquals(expectedCommand, command);
-    String observedText = testOutput.get("text").getAsString();
+
+    String observedText = capturedData.get("text").getAsString();
     String expectedText = "1" + System.lineSeparator()
         + "-----------------------------" + System.lineSeparator()
         + "* Type: " + System.lineSeparator()
