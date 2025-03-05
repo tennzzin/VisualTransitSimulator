@@ -92,4 +92,13 @@ public class Passenger {
   public int getTimeOnVehicle() {
     return timeOnVehicle;
   }
+
+  /**
+   * Gets the name of the passenger.
+   *
+   * @return the passenger's name
+   */
+  public String getName() {
+    return name;
+  }
 }

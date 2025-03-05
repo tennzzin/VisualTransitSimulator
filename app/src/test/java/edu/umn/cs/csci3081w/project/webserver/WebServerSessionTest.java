@@ -85,5 +85,4 @@ public class WebServerSessionTest {
     assertEquals("observedVehicle", capturedData.get("command").getAsString());
     assertEquals("Test Vehicle Data", capturedData.get("text").getAsString());
   }
-
 }

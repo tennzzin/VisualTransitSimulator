@@ -119,6 +119,7 @@ public class TrainFactoryTest {
 
   }
 
+<<<<<<< HEAD
   /**
    * Testing the constructor for TrainFactory with night-time generation strategy.
    */
@@ -130,4 +131,6 @@ public class TrainFactoryTest {
     TrainFactory nightFactory = new TrainFactory(storageFacility, counter, 20);
     assertTrue(nightFactory.getGenerationStrategy() instanceof TrainStrategyNight);
   }
+=======
+>>>>>>> 7674128 (Completed PassengerFactory Tests)
 }
