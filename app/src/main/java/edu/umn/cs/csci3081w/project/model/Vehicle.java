@@ -411,10 +411,16 @@ public abstract class Vehicle implements VehicleObserver {
     return tripCompleted;
   }
 
+  /**
+   * Sets the vehicle concrete subject that will be used for observing the vehicle.
+   *
+   * @param vehicleConcreteSubject the concrete subject to set
+   */
   @Override
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 =======
@@ -436,5 +442,7 @@ public abstract class Vehicle implements VehicleObserver {
 //  public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
 //    this.vehicleConcreteSubject = vehicleConcreteSubject;
 //  }
+=======
+>>>>>>> 02227c3 (fixed checkstyle issues)
 }
 >>>>>>> cec96d1 (refractored VehicleTest, refracorted WebServerSessionTest, implemented TestVehicleDataSender, RealVehicleDataSender, and RealVehicleDataSender)

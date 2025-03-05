@@ -1,7 +1,11 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -228,7 +232,7 @@ public class VehicleTest {
     when(mockedLine.getOutboundRoute()).thenReturn(mockedOutboundRoute);
     when(mockedLine.getInboundRoute()).thenReturn(mockedInboundRoute);
 
-    TestVehicleDataSender testSenderMock = new TestVehicleDataSender(); //create TestVehicleDataSender
+    TestVehicleDataSender testSenderMock = new TestVehicleDataSender();
     Vehicle realVehicle = new SmallBus(1, mockedLine, 50, 5.0);
     Vehicle spyVehicle = spy(realVehicle); //spy on the real vehicle
     spyVehicle.setDataSender(testSenderMock);
