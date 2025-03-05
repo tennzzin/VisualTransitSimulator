@@ -158,8 +158,13 @@ public class VehicleDecorator extends Vehicle {
   }
 
   @Override
+<<<<<<< HEAD
   public JsonObject getTestOutput() {
     return vehicle.getTestOutput();
+=======
+  public void setDataSender(VehicleDataSender dataSender) {
+    vehicle.setDataSender(dataSender);
+>>>>>>> 937941d (fixed checkstyle)
   }
 
   @Override
