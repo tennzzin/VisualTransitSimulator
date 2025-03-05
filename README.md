@@ -29,10 +29,12 @@ The **Visual Transit Simulator (VTS)** is a Java-based simulation that models pu
    git clone https://github.com/tennzzin/VisualTransitSimulator.git
    cd VisualTransitSimulator
 2. Start the simulation module:
+   ```sh
    ./gradlew appRun
-3. Open a web browser and go to:
+4. Open a web browser and go to:
+   ```
    http://localhost:7777/project/web_graphics/project.html
-4. Use the web interface to control the simulation (start, pause, etc.).
+6. Use the web interface to control the simulation (start, pause, etc.).
 
 ## Skills Demonstrated
 
